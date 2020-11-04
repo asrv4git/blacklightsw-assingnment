@@ -12,7 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import java.sql.Date;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Set;
+import java.util.Arrays;
 
 /**
  * This class is responsible for propagating some dummy data in data base
@@ -52,37 +52,37 @@ public class DumpDummyDataRunner implements CommandLineRunner {
         Game game1 = new Game();
         game1.setGameId(50001L);
         game1.setStartTime(Date.from(Instant.now().plus(Duration.ofDays(2))));
-        game1.setGamePlayedByUsers(Set.of(user1, user4));
+        game1.setGamePlayedByUsers(Arrays.asList(user1, user4));
         game1.setGameWonByUser(null); //null signifies no user has won the game (game is not played yet)
 
         //game 2
         Game game2 = new Game();
         game2.setGameId(50002L);
         game2.setStartTime(Date.from(Instant.now().minus(Duration.ofDays(1))));
-        game2.setGamePlayedByUsers(Set.of(user3, user2));
+        game2.setGamePlayedByUsers(Arrays.asList(user3, user2));
         game2.setGameWonByUser(user2);
 
         //game 3
         Game game3 = new Game();
         game3.setGameId(50003L);
         game3.setStartTime(Date.from(Instant.now().plus(Duration.ofHours(10))));
-        game3.setGamePlayedByUsers(Set.of(user1, user3));
+        game3.setGamePlayedByUsers(Arrays.asList(user1, user3));
         game3.setGameWonByUser(null);
 
         //game 4
         Game game4 = new Game();
         game4.setGameId(50004L);
         game4.setStartTime(Date.from(Instant.now().minus(Duration.ofHours(2))));
-        game4.setGamePlayedByUsers(Set.of(user4, user2));
+        game4.setGamePlayedByUsers(Arrays.asList(user4, user2));
         game4.setGameWonByUser(user4);
 
-        user1.setGamesPlayed(Set.of(game3, game1));
-        user2.setGamesPlayed(Set.of(game2, game4));
-        user3.setGamesPlayed(Set.of(game2, game3));
-        user4.setGamesPlayed(Set.of(game1, game4));
+        user1.setGamesPlayed(Arrays.asList(game3, game1));
+        user2.setGamesPlayed(Arrays.asList(game2, game4));
+        user3.setGamesPlayed(Arrays.asList(game2, game3));
+        user4.setGamesPlayed(Arrays.asList(game1, game4));
 
-        user4.getGamesWon().addAll(Set.of(game2));
-        user4.getGamesWon().addAll(Set.of(game4));
+        user4.getGamesWon().addAll(Arrays.asList(game2));
+        user4.getGamesWon().addAll(Arrays.asList(game4));
 
         user1.setLastGameId(game3.getGameId());
         user2.setLastGameId(game4.getGameId());
